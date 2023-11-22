@@ -3,6 +3,15 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 
+# Initialize connection.
+conn = st.connection('mysql', type='sql')
+
+df = conn.query('SELECT * from ecletica_financeiro;', ttl=600)
+
+# num_ticket, data_hora_abre, data_hora_fecha, vlr_total, dinheiro
+for row in df.itertuples():
+    st.write(f"{row.num_ticket} , {row.data_hora_abre}, {row.data_hora_fecha}, {row.vlr_total}, {row.dinheiro} ")
+
 """
 # Bem vindo ao exemplo de Streamlit do Mbmaciel!
 
